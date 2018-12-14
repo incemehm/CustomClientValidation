@@ -27,5 +27,15 @@ namespace CustomClientValidation.Models
 
         [DateGreaterThan("StartDate", "EndDate must be greater than StartDate")]
         public DateTime EndDate { get; set; }
+
+        public bool IsForeigner { get; set; }
+
+        [RequiredIf("IsForeigner", Comparison.IsEqualTo, true, "IdentityNumber is required")]
+        public string ForeignIdentityNumber { get; set; }
+
+        public string SpouseName { get; set; }
+
+        [RequiredIf("SpouseName", Comparison.IsNotEmpty)]
+        public DateTime? MarriageDate { get; set; }
     }
 }

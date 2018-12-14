@@ -14,8 +14,8 @@ namespace CustomClientValidation.Models.Attributes
 
         public ValidateAgeAttribute(int minimumAgeProperty,int maximumAgeProperty, string errorMessage = null) : base(errorMessage ?? DefaultErrorMessage)
         {
-            _minimumDateProperty = DateTime.Now.AddYears(minimumAgeProperty * -1);
-            _maximumDateProperty = DateTime.Now.AddYears(maximumAgeProperty * -1);
+            _minimumDateProperty = DateTime.Now.AddYears(maximumAgeProperty * -1);
+            _maximumDateProperty = DateTime.Now.AddYears(minimumAgeProperty * -1); 
         }
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
@@ -40,8 +40,8 @@ namespace CustomClientValidation.Models.Attributes
                 ErrorMessage = FormatErrorMessage(metadata.GetDisplayName()),
             };
 
-            rule.ValidationParameters.Add("minumumdate", _minimumDateProperty.ToShortDateString());
-            rule.ValidationParameters.Add("maximumdate", _maximumDateProperty.ToShortDateString());
+            rule.ValidationParameters.Add("minimumdate", _minimumDateProperty);
+            rule.ValidationParameters.Add("maximumdate", _maximumDateProperty);
 
             yield return rule;
         }

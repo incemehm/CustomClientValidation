@@ -18,11 +18,11 @@ namespace CustomClientValidation.Models.Attributes
         {
             if (value != null)
             {
-                var otherPropertyInfo = validationContext.ObjectType.GetProperty(this._toProperty);
-                if (otherPropertyInfo.PropertyType.Equals(typeof(string)))
+                var toPropertyInfo = validationContext.ObjectType.GetProperty(this._toProperty);
+                if (toPropertyInfo.PropertyType.Equals(typeof(string)))
                 {
                     string toBeValidated = (string)value;
-                    string toBeReferenced = (string)otherPropertyInfo.GetValue(validationContext.ObjectInstance, null);
+                    string toBeReferenced = (string)toPropertyInfo.GetValue(validationContext.ObjectInstance, null);
                     if (toBeValidated != toBeReferenced)
                     {
                         return new ValidationResult(FormatErrorMessage(validationContext.DisplayName));
